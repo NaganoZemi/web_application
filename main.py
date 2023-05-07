@@ -38,4 +38,4 @@ if button==True:
     st.pyplot(pltb)
     st.header("購入株数")
     result_df=result.result(money,name_list,weight,dfn)
-    st.write(result_df)
+    st.table(result_df)
