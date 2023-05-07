@@ -11,7 +11,7 @@ import result
 st.title("株式投資ポートフォリオ提案")
 
 
-name = st.text_input('証券コードをコンマ区切りで入力してください')
+name = st.text_input('証券コードをコンマ区切りで入力してください(例：xxxx.JP,yyyy.JP,zzzz.JP)')
 name_list=name.split(",")
 s=st.text_input('計測開始日を入力してください(mm/dd/yy)')
 e=st.text_input('計測終了日を入力してください(mm/dd/yy)')
