@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib import gridspec
 
 #cop_list1=["3407.JP","7453.JP","5021.JP","6504.JP","8035.JP","8830.JP","3626.JP","4062.JP","3861.JP","4206.JP"]
-def eff(cop_list, start1, end1):
+def eff(cop_list, start1, end1,label):
     start=start1
     end=end1
     symbols = cop_list
@@ -143,13 +143,17 @@ def eff(cop_list, start1, end1):
     df_min = df.sort_values("Volatility", ascending=True)
     df2=df_min.head(1)
     df2_2=df2.rename(index={df2.index[0]: '最少分散ポートフォリオ'})
-    df=pd.concat([df1_2,df2_2], axis=0)
-    ddff=df_sharpe.tail(1).drop(["Returns","Volatility","Sharpe Ratio"],axis=1)
+    dfdf=pd.concat([df1_2,df2_2], axis=0)
+
+    if label=="最大シャープレシオ":
+        ddff=df_sharpe.tail(1).drop(["Returns","Volatility","Sharpe Ratio"],axis=1)
+    elif label=="最小リスク":
+        ddff=df_min.head(1).drop(["Returns","Volatility","Sharpe Ratio"],axis=1)
     wights=[]
     for i in range(0,len(ddff.columns)):
         wights.append(round(ddff.iat[0,i],8))
 
-    return plt,df,wights,master_df
+    return plt,dfdf,wights,master_df
 
 #df = data.DataReader("4206.JP","stooq","01/04/19","02/03/23")
 #print(df)
