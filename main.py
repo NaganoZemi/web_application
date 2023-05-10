@@ -16,7 +16,7 @@ name_list=name.split(",")
 s=st.text_input('計測開始日を入力してください(mm/dd/yy)')
 e=st.text_input('計測終了日を入力してください(mm/dd/yy)')
 money=st.text_input('投資金額を入力してください(万)')
-label=st.radio('計算方法を選択してください',('最小リスク','最大シャープレシオ'))
+label=st.radio('ポートフォリオを選択してください',('最小リスク','最大シャープレシオ'))
 button = st.button('計算開始')
 if button==True:
     st.header('企業一覧')
