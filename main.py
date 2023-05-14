@@ -7,20 +7,46 @@ import nikkei
 import beta
 import cor
 import result
+import requests
 
+#@st.cache
+def df_get():
+    url = "https://www.jpx.co.jp/markets/statistics-equities/misc/tvdivq0000001vg2-att/data_j.xls"
+    r = requests.get(url)
+    with open('data_j.xls', 'wb') as output:
+        output.write(r.content)
+    cor_df = pd.read_excel("./data_j.xls", index_col=1)[["銘柄名"]]
+    return cor_df
+
+cor_df=df_get()
 st.title("株式投資ポートフォリオ提案")
 
+select=st.selectbox("企業名入力",cor_df['銘柄名'].to_list())
+sel_button=st.button("企業追加")
 
-name = st.text_input('証券コードをコンマ区切りで入力してください(例：xxxx.JP,yyyy.JP,zzzz.JP)')
-name_list=name.split(",")
-s=st.text_input('計測開始日を入力してください(mm/dd/yy)')
-e=st.text_input('計測終了日を入力してください(mm/dd/yy)')
-money=st.text_input('投資金額を入力してください(万)')
+
+if 'name1' not in st.session_state: # 初期化
+    st.session_state['name1'] = ""
+
+if sel_button:
+    num=cor_df[cor_df["銘柄名"]==select].index[0]
+    if st.session_state['name1'] == "":
+       st.session_state['name1'] =str(num)+".JP,"
+    else:
+        st.session_state['name1'] =st.session_state['name1']+str(num)+".JP,"
+    #st.write(f"{num}.JP")
+name = st.text_input('証券コードをコンマ区切りで入力してください(例：xxxx.JP,yyyy.JP,zzzz.JP)',value=st.session_state['name1'])
+
+
+name_list=name.rstrip(',').split(",")
+s=st.text_input('計測開始日を入力してください(mm/dd/yy)',value='01/01/20')
+e=st.text_input('計測終了日を入力してください(mm/dd/yy)',value='01/01/23')
+money=st.text_input('投資金額を入力してください(万)',value='100')
 label=st.radio('ポートフォリオを選択してください',('最小リスク','最大シャープレシオ'))
 button = st.button('計算開始')
 if button==True:
     st.header('企業一覧')
-    dfn=cor.cor(name_list)
+    dfn=cor.cor(name_list,cor_df)
     st.table(dfn)
     st.header('効率的フロンティア')
     plta,sharp,weight,df=eff.eff(name_list,s,e,label)
