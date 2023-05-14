@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import price
 import nikkei
 import beta
-import cor
 import result
 import requests
 
@@ -17,6 +16,16 @@ def df_get():
         output.write(r.content)
     cor_df = pd.read_excel("./data_j.xls", index_col=1)[["銘柄名"]]
     return cor_df
+def cor(name,df):
+    name_list=name
+    base= pd.DataFrame({'銘柄名': []})
+    base.index.name="コード"
+
+    for i in name_list:
+        x=i.replace(".JP","")
+        df1=df.loc[df.index == int(x)]
+        base=pd.concat([base,df1])
+    return base
 
 cor_df=df_get()
 st.title("株式投資ポートフォリオ提案")
@@ -46,7 +55,7 @@ label=st.radio('ポートフォリオを選択してください',('最小リス
 button = st.button('計算開始')
 if button==True:
     st.header('企業一覧')
-    dfn=cor.cor(name_list,cor_df)
+    dfn=cor(name_list,cor_df)
     st.table(dfn)
     st.header('効率的フロンティア')
     plta,sharp,weight,df=eff.eff(name_list,s,e,label)
