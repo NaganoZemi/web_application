@@ -41,10 +41,13 @@ if sel_button:
     num=cor_df[cor_df["銘柄名"]==select].index[0]
     if st.session_state['name1'] == "":
        st.session_state['name1'] =str(num)+".JP,"
+    elif st.session_state['name1'][-1] != ",":
+        st.session_state['name1'] =st.session_state['name1']+","+str(num)+".JP,"
     else:
         st.session_state['name1'] =st.session_state['name1']+str(num)+".JP,"
     #st.write(f"{num}.JP")
 name = st.text_input('証券コードをコンマ区切りで入力してください(例：xxxx.JP,yyyy.JP,zzzz.JP)',value=st.session_state['name1'])
+st.session_state['name1'] = name
 
 
 name_list=name.rstrip(',').split(",")
