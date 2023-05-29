@@ -35,6 +35,8 @@ def price(x,y,master_df):
                   yaxis=dict(title='価格'),
                   )
     fig.update_layout(
-        plot_bgcolor='black'
+        plot_bgcolor='black',
+        width=900,
+        height=300
         )
     return fig,z2
