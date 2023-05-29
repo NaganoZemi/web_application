@@ -63,7 +63,7 @@ def beta(datam,nikkei_df,s,e):
         plot_bgcolor='black',
         hovermode='x',
         width=800,
-        height=500
+        height=400
         )
     return fig,'%.3f' %model_lr.coef_
     #print('%.3f' %model_lr.coef_)

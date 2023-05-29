@@ -43,6 +43,6 @@ def nikkei(data0,start,end):
         plot_bgcolor='black',
         hovermode='x',
         width=800,
-        height=500
+        height=400
         )
     return fig,df_m
