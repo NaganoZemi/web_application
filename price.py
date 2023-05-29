@@ -36,7 +36,7 @@ def price(x,y,master_df):
                   )
     fig.update_layout(
         plot_bgcolor='black',
-        width=900,
-        height=300
+        width=1000,
+        height=600
         )
     return fig,z2

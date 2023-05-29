@@ -42,7 +42,7 @@ def nikkei(data0,start,end):
     fig.update_layout(
         plot_bgcolor='black',
         hovermode='x',
-        width=900,
-        height=300
+        width=1000,
+        height=600
         )
     return fig,df_m
