@@ -74,7 +74,7 @@ if button==True:
     st.header("市場β値")
     pltb,beta1=beta.beta(stock_data,nikkeidf,s,e)
     st.text("市場β値："+beta1)
-    st.subheader("日経平均株価との価格推移比較")
+    st.subheader("日経平均株価との価格推移比較（正規化）")
     st.plotly_chart(pltb)
     st.header("購入株数")
     result_df=result.result(money,name_list,weight,dfn)

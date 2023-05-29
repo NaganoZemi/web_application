@@ -57,7 +57,7 @@ def beta(datam,nikkei_df,s,e):
                     )
             )
     fig.update_layout(xaxis=dict(title='日付'),
-                  yaxis=dict(title='累積リターン'),
+                  yaxis=dict(title='正規化株価'),
                   )
     fig.update_layout(
         plot_bgcolor='black',
