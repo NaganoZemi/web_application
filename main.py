@@ -64,7 +64,7 @@ if button==True:
     plta,sharp,weight,df=eff.eff(name_list,s,e,label)
     st.write(sharp)
     st.pyplot(plta)
-    st.header('提案するポートフォリオの価格変動')
+    st.header('ポートフォリオ平均株価')
     pltp,stock_data=price.price(name_list,weight,df)
     #st.pyplot(pltp)
     st.plotly_chart(pltp)
